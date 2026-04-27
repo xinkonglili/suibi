@@ -9,6 +9,6 @@ import (
 	"goframeP/frame/api/hello/v1"
 )
 
-func (c *ControllerV1) GetList(ctx context.Context, req *v1.GetListReq) (res *v1.GetListRes, err error) {
+func (c *ControllerV1) UserGetList(ctx context.Context, req *v1.UserGetListReq) (res *v1.UserGetListRes, err error) {
 	return nil, gerror.NewCode(gcode.CodeNotImplemented)
 }

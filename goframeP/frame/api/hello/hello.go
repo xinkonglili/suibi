@@ -11,9 +11,9 @@ import (
 )
 
 type IHelloV1 interface {
-	Create(ctx context.Context, req *v1.CreateReq) (res *v1.CreateRes, err error)
-	Delete(ctx context.Context, req *v1.DeleteReq) (res *v1.DeleteRes, err error)
-	Update(ctx context.Context, req *v1.UpdateReq) (res *v1.UpdateRes, err error)
-	GetOne(ctx context.Context, req *v1.GetOneReq) (res *v1.GetOneRes, err error)
-	GetList(ctx context.Context, req *v1.GetListReq) (res *v1.GetListRes, err error)
+	UserCreate(ctx context.Context, req *v1.UserCreateReq) (res *v1.UserCreateRes, err error)
+	UserDelete(ctx context.Context, req *v1.UserDeleteReq) (res *v1.UserDeleteRes, err error)
+	UserUpdate(ctx context.Context, req *v1.UserUpdateReq) (res *v1.UserUpdateRes, err error)
+	UserGetOne(ctx context.Context, req *v1.UserGetOneReq) (res *v1.UserGetOneRes, err error)
+	UserGetList(ctx context.Context, req *v1.UserGetListReq) (res *v1.UserGetListRes, err error)
 }

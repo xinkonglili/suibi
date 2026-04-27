@@ -9,6 +9,6 @@ import (
 	"goframeP/frame/api/hello/v1"
 )
 
-func (c *ControllerV1) GetOne(ctx context.Context, req *v1.GetOneReq) (res *v1.GetOneRes, err error) {
+func (c *ControllerV1) UserDelete(ctx context.Context, req *v1.UserDeleteReq) (res *v1.UserDeleteRes, err error) {
 	return nil, gerror.NewCode(gcode.CodeNotImplemented)
 }

@@ -19,3 +19,7 @@ gf gen dao
 ```
     gf gen ctrl
 ```
+
+如果想生成带有api/hello/v1/user的带有user前缀的代码，需要请求前面有完整的user前缀
+![第一步](./image/img_1.png)
+![第二步](./image/img_2.png)
