@@ -1,0 +1,14 @@
+gfcli:
+  gen:
+    dao:
+      - link: "mysql:root:Jinli666@tcp(127.0.0.1:3306)/business_trip_test"
+        descriptionTag: true
+        srcFolder: "./frame/api"
+        dstFolder: "./frame/internal/controller"
+        path: "./internal"        # add this
+        group: "default"          # optional but recommended
+
+  docker:
+    build: "-a amd64 -s linux -p temp -ew"
+    tagPrefixes:
+      - my.image.pub/my-app
