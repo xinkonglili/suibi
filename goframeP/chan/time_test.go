@@ -55,6 +55,7 @@ func TestChanTime(t *testing.T) {
 	}
 }
 
+// 使用 context.WithTimeout
 func TestChanTimeWithContext(t *testing.T) {
 	// 设置一个 4 秒的超时时间
 	ctx, cancel := context.WithTimeout(context.Background(), 4*time.Second)

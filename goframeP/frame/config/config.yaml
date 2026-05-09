@@ -1,3 +1,6 @@
+server:
+  address: "127.0.0.1:8080"
+
 gfcli:
   gen:
     dao:
@@ -12,3 +15,9 @@ gfcli:
     build: "-a amd64 -s linux -p temp -ew"
     tagPrefixes:
       - my.image.pub/my-app
+
+
+
+test:
+  read:
+    user: "root"
