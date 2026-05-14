@@ -11,7 +11,7 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 )
 
-// UserDao is the data access object for the frame user.
+// UserDao is the data access object for the table user.
 type UserDao struct {
 	table    string             // table is the underlying table name of the DAO.
 	group    string             // group is the database configuration group name of the current DAO.
@@ -19,7 +19,7 @@ type UserDao struct {
 	handlers []gdb.ModelHandler // handlers for customized model modification.
 }
 
-// UserColumns defines and stores column names for the frame user.
+// UserColumns defines and stores column names for the table user.
 type UserColumns struct {
 	Id     string // user id
 	Name   string // user name
@@ -27,7 +27,7 @@ type UserColumns struct {
 	Age    string // user age
 }
 
-// userColumns holds the columns for the frame user.
+// userColumns holds the columns for the table user.
 var userColumns = UserColumns{
 	Id:     "id",
 	Name:   "name",
@@ -35,7 +35,7 @@ var userColumns = UserColumns{
 	Age:    "age",
 }
 
-// NewUserDao creates and returns a new DAO object for frame data access.
+// NewUserDao creates and returns a new DAO object for table data access.
 func NewUserDao(handlers ...gdb.ModelHandler) *UserDao {
 	return &UserDao{
 		group:    "default",
@@ -50,7 +50,7 @@ func (dao *UserDao) DB() gdb.DB {
 	return g.DB(dao.group)
 }
 
-// Table returns the frame name of the current DAO.
+// Table returns the table name of the current DAO.
 func (dao *UserDao) Table() string {
 	return dao.table
 }

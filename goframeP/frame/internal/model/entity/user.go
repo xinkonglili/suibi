@@ -4,7 +4,7 @@
 
 package entity
 
-// User is the golang structure for frame user.
+// User is the golang structure for table user.
 type User struct {
 	Id     uint   `json:"id"     orm:"id"     description:"user id"`     // user id
 	Name   string `json:"name"   orm:"name"   description:"user name"`   // user name

@@ -9,7 +9,7 @@ gfcli:
         srcFolder: "./frame/api"
         dstFolder: "./frame/internal/controller"
         path: "./internal"        # add this
-        group: "default"          # optional but recommended
+        group: "default"          # 配置告诉 GoFrame CLI：生成 DAO 代码时，使用 "default" 作为数据库组名
 
   docker:
     build: "-a amd64 -s linux -p temp -ew"
@@ -21,3 +21,19 @@ gfcli:
 test:
   read:
     user: "root"
+
+
+database:
+  default:  # gfcli gen dao group下面同名
+    host: "127.0.0.1"
+    port: "3306"
+    user: "root"
+    pass: "jinli666"
+    name: "business_trip_test"
+    type: "mysql"
+    debug: false
+    createdAt: "created_at"     # (可选)自动创建时间字段名称
+    updatedAt: "updated_at"   # (可选)自动更新时间字段名称
+    deletedAt: "deleted_at"     # (可选)软删除时间字段名称
+    timeMaintainDisabled: false # (可选)是否完全关闭时间更新特性，为true时CreatedAt/UpdatedAt/DeletedAt都将失效
+    timezone: "Local"

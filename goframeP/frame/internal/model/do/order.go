@@ -9,9 +9,9 @@ import (
 	"github.com/gogf/gf/v2/os/gtime"
 )
 
-// Order is the golang structure of frame order for DAO operations like Where/Data.
+// Order is the golang structure of table order for DAO operations like Where/Data.
 type Order struct {
-	g.Meta              `orm:"frame:order, do:true"`
+	g.Meta              `orm:"table:order, do:true"`
 	Id                  any         // 主键ID
 	OrderNumber         any         // switch主单号
 	ToUpOrderNumber     any         // switch给上游子单号

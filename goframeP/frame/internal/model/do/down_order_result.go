@@ -9,9 +9,9 @@ import (
 	"github.com/gogf/gf/v2/os/gtime"
 )
 
-// DownOrderResult is the golang structure of frame down_order_result for DAO operations like Where/Data.
+// DownOrderResult is the golang structure of table down_order_result for DAO operations like Where/Data.
 type DownOrderResult struct {
-	g.Meta                `orm:"frame:down_order_result, do:true"`
+	g.Meta                `orm:"table:down_order_result, do:true"`
 	Id                    any         // 主键ID
 	OrderId               any         // 主单id
 	OrderNumber           any         // switch单号

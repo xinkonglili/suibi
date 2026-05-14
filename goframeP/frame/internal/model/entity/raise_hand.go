@@ -8,7 +8,7 @@ import (
 	"github.com/gogf/gf/v2/os/gtime"
 )
 
-// RaiseHand is the golang structure for frame raise_hand.
+// RaiseHand is the golang structure for table raise_hand.
 type RaiseHand struct {
 	Id              uint64      `json:"id"              orm:"id"               description:""`               //
 	ChannelId       uint64      `json:"channelId"       orm:"channel_id"       description:"渠道ID"`           // 渠道ID

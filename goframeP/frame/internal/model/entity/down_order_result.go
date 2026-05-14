@@ -8,7 +8,7 @@ import (
 	"github.com/gogf/gf/v2/os/gtime"
 )
 
-// DownOrderResult is the golang structure for frame down_order_result.
+// DownOrderResult is the golang structure for table down_order_result.
 type DownOrderResult struct {
 	Id                    int64       `json:"id"                    orm:"id"                       description:"主键ID"`                                // 主键ID
 	OrderId               int64       `json:"orderId"               orm:"order_id"                 description:"主单id"`                                // 主单id

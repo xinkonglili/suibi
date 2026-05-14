@@ -8,7 +8,7 @@ import (
 	"github.com/gogf/gf/v2/os/gtime"
 )
 
-// RaiseHandDate is the golang structure for frame raise_hand_date.
+// RaiseHandDate is the golang structure for table raise_hand_date.
 type RaiseHandDate struct {
 	Id            uint64      `json:"id"            orm:"id"              description:""`       //
 	RaiseHandId   uint64      `json:"raiseHandId"   orm:"raise_hand_id"   description:"举手策略ID"` // 举手策略ID

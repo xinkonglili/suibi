@@ -8,11 +8,11 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 )
 
-// User is the golang structure of table user for DAO operations like Where/Data.
-type User struct {
-	g.Meta `orm:"table:user, do:true"`
-	Id     any // user id
-	Name   any // user name
-	Status any // user status
-	Age    any // user age
+// TagStatus is the golang structure of table tag_status for DAO operations like Where/Data.
+type TagStatus struct {
+	g.Meta  `orm:"table:tag_status, do:true"`
+	Kaiguan any //
+	Status  any //
+	Tag     any //
+	Id      any //
 }

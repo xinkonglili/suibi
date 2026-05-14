@@ -11,7 +11,7 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 )
 
-// RaiseHandDateDao is the data access object for the frame raise_hand_date.
+// RaiseHandDateDao is the data access object for the table raise_hand_date.
 type RaiseHandDateDao struct {
 	table    string               // table is the underlying table name of the DAO.
 	group    string               // group is the database configuration group name of the current DAO.
@@ -19,7 +19,7 @@ type RaiseHandDateDao struct {
 	handlers []gdb.ModelHandler   // handlers for customized model modification.
 }
 
-// RaiseHandDateColumns defines and stores column names for the frame raise_hand_date.
+// RaiseHandDateColumns defines and stores column names for the table raise_hand_date.
 type RaiseHandDateColumns struct {
 	Id            string //
 	RaiseHandId   string // 举手策略ID
@@ -34,7 +34,7 @@ type RaiseHandDateColumns struct {
 	DeletedAt     string //
 }
 
-// raiseHandDateColumns holds the columns for the frame raise_hand_date.
+// raiseHandDateColumns holds the columns for the table raise_hand_date.
 var raiseHandDateColumns = RaiseHandDateColumns{
 	Id:            "id",
 	RaiseHandId:   "raise_hand_id",
@@ -49,7 +49,7 @@ var raiseHandDateColumns = RaiseHandDateColumns{
 	DeletedAt:     "deleted_at",
 }
 
-// NewRaiseHandDateDao creates and returns a new DAO object for frame data access.
+// NewRaiseHandDateDao creates and returns a new DAO object for table data access.
 func NewRaiseHandDateDao(handlers ...gdb.ModelHandler) *RaiseHandDateDao {
 	return &RaiseHandDateDao{
 		group:    "default",
@@ -64,7 +64,7 @@ func (dao *RaiseHandDateDao) DB() gdb.DB {
 	return g.DB(dao.group)
 }
 
-// Table returns the frame name of the current DAO.
+// Table returns the table name of the current DAO.
 func (dao *RaiseHandDateDao) Table() string {
 	return dao.table
 }

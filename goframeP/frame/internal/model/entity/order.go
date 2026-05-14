@@ -8,7 +8,7 @@ import (
 	"github.com/gogf/gf/v2/os/gtime"
 )
 
-// Order is the golang structure for frame order.
+// Order is the golang structure for table order.
 type Order struct {
 	Id                  int64       `json:"id"                  orm:"id"                     description:"主键ID"`                                                                                          // 主键ID
 	OrderNumber         string      `json:"orderNumber"         orm:"order_number"           description:"switch主单号"`                                                                                     // switch主单号

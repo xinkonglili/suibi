@@ -11,7 +11,7 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 )
 
-// PartnerRelationshipDao is the data access object for the frame partner_relationship.
+// PartnerRelationshipDao is the data access object for the table partner_relationship.
 type PartnerRelationshipDao struct {
 	table    string                     // table is the underlying table name of the DAO.
 	group    string                     // group is the database configuration group name of the current DAO.
@@ -19,7 +19,7 @@ type PartnerRelationshipDao struct {
 	handlers []gdb.ModelHandler         // handlers for customized model modification.
 }
 
-// PartnerRelationshipColumns defines and stores column names for the frame partner_relationship.
+// PartnerRelationshipColumns defines and stores column names for the table partner_relationship.
 type PartnerRelationshipColumns struct {
 	Id              string // 主键ID
 	UpPartnerId     string // 上游流量平台ID
@@ -36,7 +36,7 @@ type PartnerRelationshipColumns struct {
 	DeletedAt       string // 更新时间
 }
 
-// partnerRelationshipColumns holds the columns for the frame partner_relationship.
+// partnerRelationshipColumns holds the columns for the table partner_relationship.
 var partnerRelationshipColumns = PartnerRelationshipColumns{
 	Id:              "id",
 	UpPartnerId:     "up_partner_id",
@@ -53,7 +53,7 @@ var partnerRelationshipColumns = PartnerRelationshipColumns{
 	DeletedAt:       "deleted_at",
 }
 
-// NewPartnerRelationshipDao creates and returns a new DAO object for frame data access.
+// NewPartnerRelationshipDao creates and returns a new DAO object for table data access.
 func NewPartnerRelationshipDao(handlers ...gdb.ModelHandler) *PartnerRelationshipDao {
 	return &PartnerRelationshipDao{
 		group:    "default",
@@ -68,7 +68,7 @@ func (dao *PartnerRelationshipDao) DB() gdb.DB {
 	return g.DB(dao.group)
 }
 
-// Table returns the frame name of the current DAO.
+// Table returns the table name of the current DAO.
 func (dao *PartnerRelationshipDao) Table() string {
 	return dao.table
 }

@@ -8,7 +8,7 @@ import (
 	"github.com/gogf/gf/v2/os/gtime"
 )
 
-// PartnerCityConfig is the golang structure for frame partner_city_config.
+// PartnerCityConfig is the golang structure for table partner_city_config.
 type PartnerCityConfig struct {
 	Id             int64       `json:"id"             orm:"id"               description:"主键ID"`             // 主键ID
 	PartnerId      int64       `json:"partnerId"      orm:"partner_id"       description:"渠道ID"`             // 渠道ID

@@ -9,9 +9,9 @@ import (
 	"github.com/gogf/gf/v2/os/gtime"
 )
 
-// PartnerRelationship is the golang structure of frame partner_relationship for DAO operations like Where/Data.
+// PartnerRelationship is the golang structure of table partner_relationship for DAO operations like Where/Data.
 type PartnerRelationship struct {
-	g.Meta          `orm:"frame:partner_relationship, do:true"`
+	g.Meta          `orm:"table:partner_relationship, do:true"`
 	Id              any         // 主键ID
 	UpPartnerId     any         // 上游流量平台ID
 	UpPartnerCode   any         //

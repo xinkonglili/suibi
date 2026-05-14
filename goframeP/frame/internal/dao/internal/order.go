@@ -11,7 +11,7 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 )
 
-// OrderDao is the data access object for the frame order.
+// OrderDao is the data access object for the table order.
 type OrderDao struct {
 	table    string             // table is the underlying table name of the DAO.
 	group    string             // group is the database configuration group name of the current DAO.
@@ -19,7 +19,7 @@ type OrderDao struct {
 	handlers []gdb.ModelHandler // handlers for customized model modification.
 }
 
-// OrderColumns defines and stores column names for the frame order.
+// OrderColumns defines and stores column names for the table order.
 type OrderColumns struct {
 	Id                  string // 主键ID
 	OrderNumber         string // switch主单号
@@ -63,7 +63,7 @@ type OrderColumns struct {
 	UpUserId            string // 上游用户ID
 }
 
-// orderColumns holds the columns for the frame order.
+// orderColumns holds the columns for the table order.
 var orderColumns = OrderColumns{
 	Id:                  "id",
 	OrderNumber:         "order_number",
@@ -107,7 +107,7 @@ var orderColumns = OrderColumns{
 	UpUserId:            "up_user_id",
 }
 
-// NewOrderDao creates and returns a new DAO object for frame data access.
+// NewOrderDao creates and returns a new DAO object for table data access.
 func NewOrderDao(handlers ...gdb.ModelHandler) *OrderDao {
 	return &OrderDao{
 		group:    "default",
@@ -122,7 +122,7 @@ func (dao *OrderDao) DB() gdb.DB {
 	return g.DB(dao.group)
 }
 
-// Table returns the frame name of the current DAO.
+// Table returns the table name of the current DAO.
 func (dao *OrderDao) Table() string {
 	return dao.table
 }

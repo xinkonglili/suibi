@@ -11,7 +11,7 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 )
 
-// DownOrderResultDao is the data access object for the frame down_order_result.
+// DownOrderResultDao is the data access object for the table down_order_result.
 type DownOrderResultDao struct {
 	table    string                 // table is the underlying table name of the DAO.
 	group    string                 // group is the database configuration group name of the current DAO.
@@ -19,7 +19,7 @@ type DownOrderResultDao struct {
 	handlers []gdb.ModelHandler     // handlers for customized model modification.
 }
 
-// DownOrderResultColumns defines and stores column names for the frame down_order_result.
+// DownOrderResultColumns defines and stores column names for the table down_order_result.
 type DownOrderResultColumns struct {
 	Id                    string // 主键ID
 	OrderId               string // 主单id
@@ -42,7 +42,7 @@ type DownOrderResultColumns struct {
 	DeletedAt             string // 更新时间
 }
 
-// downOrderResultColumns holds the columns for the frame down_order_result.
+// downOrderResultColumns holds the columns for the table down_order_result.
 var downOrderResultColumns = DownOrderResultColumns{
 	Id:                    "id",
 	OrderId:               "order_id",
@@ -65,7 +65,7 @@ var downOrderResultColumns = DownOrderResultColumns{
 	DeletedAt:             "deleted_at",
 }
 
-// NewDownOrderResultDao creates and returns a new DAO object for frame data access.
+// NewDownOrderResultDao creates and returns a new DAO object for table data access.
 func NewDownOrderResultDao(handlers ...gdb.ModelHandler) *DownOrderResultDao {
 	return &DownOrderResultDao{
 		group:    "default",
@@ -80,7 +80,7 @@ func (dao *DownOrderResultDao) DB() gdb.DB {
 	return g.DB(dao.group)
 }
 
-// Table returns the frame name of the current DAO.
+// Table returns the table name of the current DAO.
 func (dao *DownOrderResultDao) Table() string {
 	return dao.table
 }

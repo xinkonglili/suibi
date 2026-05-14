@@ -9,9 +9,9 @@ import (
 	"github.com/gogf/gf/v2/os/gtime"
 )
 
-// RaiseHandTime is the golang structure of frame raise_hand_time for DAO operations like Where/Data.
+// RaiseHandTime is the golang structure of table raise_hand_time for DAO operations like Where/Data.
 type RaiseHandTime struct {
-	g.Meta        `orm:"frame:raise_hand_time, do:true"`
+	g.Meta        `orm:"table:raise_hand_time, do:true"`
 	Id            any         //
 	RaiseHandId   any         // 举手策略ID
 	StartTime     *gtime.Time // 开始时间

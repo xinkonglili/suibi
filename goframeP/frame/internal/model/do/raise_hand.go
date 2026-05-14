@@ -9,9 +9,9 @@ import (
 	"github.com/gogf/gf/v2/os/gtime"
 )
 
-// RaiseHand is the golang structure of frame raise_hand for DAO operations like Where/Data.
+// RaiseHand is the golang structure of table raise_hand for DAO operations like Where/Data.
 type RaiseHand struct {
-	g.Meta          `orm:"frame:raise_hand, do:true"`
+	g.Meta          `orm:"table:raise_hand, do:true"`
 	Id              any         //
 	ChannelId       any         // 渠道ID
 	ChannelCode     any         // 渠道code

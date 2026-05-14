@@ -9,9 +9,9 @@ import (
 	"github.com/gogf/gf/v2/os/gtime"
 )
 
-// PartnerCityConfig is the golang structure of frame partner_city_config for DAO operations like Where/Data.
+// PartnerCityConfig is the golang structure of table partner_city_config for DAO operations like Where/Data.
 type PartnerCityConfig struct {
-	g.Meta         `orm:"frame:partner_city_config, do:true"`
+	g.Meta         `orm:"table:partner_city_config, do:true"`
 	Id             any         // 主键ID
 	PartnerId      any         // 渠道ID
 	BizCode        any         // 业务方编码

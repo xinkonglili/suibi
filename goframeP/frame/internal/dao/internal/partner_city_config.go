@@ -11,7 +11,7 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 )
 
-// PartnerCityConfigDao is the data access object for the frame partner_city_config.
+// PartnerCityConfigDao is the data access object for the table partner_city_config.
 type PartnerCityConfigDao struct {
 	table    string                   // table is the underlying table name of the DAO.
 	group    string                   // group is the database configuration group name of the current DAO.
@@ -19,7 +19,7 @@ type PartnerCityConfigDao struct {
 	handlers []gdb.ModelHandler       // handlers for customized model modification.
 }
 
-// PartnerCityConfigColumns defines and stores column names for the frame partner_city_config.
+// PartnerCityConfigColumns defines and stores column names for the table partner_city_config.
 type PartnerCityConfigColumns struct {
 	Id             string // 主键ID
 	PartnerId      string // 渠道ID
@@ -43,7 +43,7 @@ type PartnerCityConfigColumns struct {
 	AddTest1       string // 测试字段类型
 }
 
-// partnerCityConfigColumns holds the columns for the frame partner_city_config.
+// partnerCityConfigColumns holds the columns for the table partner_city_config.
 var partnerCityConfigColumns = PartnerCityConfigColumns{
 	Id:             "id",
 	PartnerId:      "partner_id",
@@ -67,7 +67,7 @@ var partnerCityConfigColumns = PartnerCityConfigColumns{
 	AddTest1:       "add_test_1",
 }
 
-// NewPartnerCityConfigDao creates and returns a new DAO object for frame data access.
+// NewPartnerCityConfigDao creates and returns a new DAO object for table data access.
 func NewPartnerCityConfigDao(handlers ...gdb.ModelHandler) *PartnerCityConfigDao {
 	return &PartnerCityConfigDao{
 		group:    "default",
@@ -82,7 +82,7 @@ func (dao *PartnerCityConfigDao) DB() gdb.DB {
 	return g.DB(dao.group)
 }
 
-// Table returns the frame name of the current DAO.
+// Table returns the table name of the current DAO.
 func (dao *PartnerCityConfigDao) Table() string {
 	return dao.table
 }

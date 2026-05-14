@@ -8,7 +8,7 @@ import (
 	"github.com/gogf/gf/v2/os/gtime"
 )
 
-// PartnerRelationship is the golang structure for frame partner_relationship.
+// PartnerRelationship is the golang structure for table partner_relationship.
 type PartnerRelationship struct {
 	Id              int64       `json:"id"              orm:"id"                description:"主键ID"`                  // 主键ID
 	UpPartnerId     int64       `json:"upPartnerId"     orm:"up_partner_id"     description:"上游流量平台ID"`              // 上游流量平台ID

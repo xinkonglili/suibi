@@ -5,9 +5,6 @@
 package dao
 
 import (
-	"context"
-	"github.com/gogf/gf/v2/database/gdb"
-	daoContext "goframeP/frame/internal/dao"
 	"goframeP/frame/internal/dao/internal"
 )
 
@@ -17,23 +14,23 @@ type orderDao struct {
 	*internal.OrderDao
 }
 
-var (
-	// Order is a globally accessible object for frame order operations.
-	Order = orderDao{internal.NewOrderDao(withTenantFilter())}
-)
+//var (
+//	// Order is a globally accessible object for frame order operations.
+//	Order = orderDao{internal.NewOrderDao(withTenantFilter())}
+//)
 
-// withTenantFilter 创建租户（渠道）过滤钩子
-// 根据当前登录用户的租户ID自动过滤数据
-func withTenantFilter() gdb.ModelHandler {
-	return func(ctx context.Context, model *gdb.Model) *gdb.Model {
-		// 从 context 中获取租户ID（渠道ID）
-		if tenantId, ok := daoContext.GetTenant(ctx); ok && tenantId > 0 {
-			// 自动添加租户过滤条件
-			// 假设订单表中有 tenant_id 字段
-			return model.Where("tenant_id", tenantId)
-		}
-		return model
-	}
-}
+//// withTenantFilter 创建租户（渠道）过滤钩子
+//// 根据当前登录用户的租户ID自动过滤数据
+//func withTenantFilter() gdb.ModelHandler {
+//	return func(ctx context.Context, model *gdb.Model) *gdb.Model {
+//		// 从 context 中获取租户ID（渠道ID）
+//		if tenantId, ok := daoContext.GetTenant(ctx); ok && tenantId > 0 {
+//			// 自动添加租户过滤条件
+//			// 假设订单表中有 tenant_id 字段
+//			return model.Where("tenant_id", tenantId)
+//		}
+//		return model
+//	}
+//}
 
 // Add your custom methods and functionality below.
