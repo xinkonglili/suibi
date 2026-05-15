@@ -37,3 +37,6 @@ database:
     deletedAt: "deleted_at"     # (可选)软删除时间字段名称
     timeMaintainDisabled: false # (可选)是否完全关闭时间更新特性，为true时CreatedAt/UpdatedAt/DeletedAt都将失效
     timezone: "Local"
+
+  schedule_config:
+    start_sync_order_worker: 1

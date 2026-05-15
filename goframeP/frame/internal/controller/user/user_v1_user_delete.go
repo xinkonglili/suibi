@@ -1,4 +1,4 @@
-package hello
+package user
 
 import (
 	"context"
@@ -6,7 +6,7 @@ import (
 	"github.com/gogf/gf/v2/errors/gcode"
 	"github.com/gogf/gf/v2/errors/gerror"
 
-	"goframeP/frame/api/hello/v1"
+	"goframeP/frame/api/user/v1"
 )
 
 func (c *ControllerV1) UserDelete(ctx context.Context, req *v1.UserDeleteReq) (res *v1.UserDeleteRes, err error) {

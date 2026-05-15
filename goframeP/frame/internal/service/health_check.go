@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/gogf/gf/v2/database/gredis"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/os/gcron"
 )
@@ -67,7 +68,7 @@ func (s *HealthCheckService) checkSingleService(url string) DownstreamServiceSta
 	// 发起HTTP请求检查健康状态
 	client := g.Client()
 	client.SetTimeout(5 * time.Second)
-	
+
 	resp, err := client.Get(s.ctx, url)
 	if err != nil {
 		status.IsHealthy = false
@@ -91,14 +92,21 @@ func (s *HealthCheckService) saveStatus(status DownstreamServiceStatus) {
 	// 这里可以保存到数据库或Redis
 	// 示例：保存到Redis
 	key := fmt.Sprintf("health_check:%s", status.ServiceName)
-	g.Redis().Set(s.ctx, key, status, 5*time.Minute)
+
+	// 使用 gredis.SetOption 设置过期时间
+	_, err := g.Redis().Set(s.ctx, key, status, gredis.SetOption{})
+
+	g.Redis().Expire(s.ctx, key, int64(time.Hour.Seconds()))
+	if err != nil {
+		g.Log().Warning(s.ctx, fmt.Sprintf("保存健康检查状态到Redis失败: %v", err))
+	}
 }
 
 // sendAlert 发送告警
 func (s *HealthCheckService) sendAlert(status DownstreamServiceStatus) {
 	// 可以实现发送邮件、短信、钉钉、企业微信等告警
 	g.Log().Error(s.ctx, fmt.Sprintf("【告警】下游服务异常: %+v", status))
-	
+
 	// 示例：发送到钉钉
 	// s.sendDingTalkAlert(status)
 }
@@ -107,11 +115,19 @@ func (s *HealthCheckService) sendAlert(status DownstreamServiceStatus) {
 func (s *HealthCheckService) GetServiceStatus(serviceName string) (*DownstreamServiceStatus, error) {
 	key := fmt.Sprintf("health_check:%s", serviceName)
 	var status DownstreamServiceStatus
-	
-	err := g.Redis().GetVar(s.ctx, key).Scan(&status)
+
+	val, err := g.Redis().Get(s.ctx, key)
 	if err != nil {
 		return nil, err
 	}
-	
+	if val.IsNil() {
+		return nil, fmt.Errorf("未找到健康检查记录")
+	}
+
+	// 将 Redis 返回值扫描到结构体中
+	if err := val.Scan(&status); err != nil {
+		return nil, err
+	}
+
 	return &status, nil
 }

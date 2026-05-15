@@ -2,11 +2,7 @@ package service
 
 import (
 	"context"
-	"fmt"
 	"time"
-
-	"github.com/gogf/gf/v2/frame/g"
-	"github.com/gogf/gf/v2/os/gretry"
 )
 
 type PushService struct {
@@ -27,28 +23,28 @@ type PushRecord struct {
 	UpdatedAt   time.Time `json:"updated_at"`
 }
 
-func NewPushService(ctx context.Context) *PushService {
+/*func NewPushService(ctx context.Context) *PushService {
 	return &PushService{ctx: ctx}
 }
 
 // PushWithRetry 带重试机制的推送
 func (s *PushService) PushWithRetry(data interface{}) error {
-	maxRetries := 3
-	
-	err := gretry.Try(s.ctx, func(ctx context.Context) error {
-		// 执行推送逻辑
-		return s.doPush(data)
-	}, gretry.Option{
-		Max:   maxRetries,
-		Delay: 2 * time.Second,  // 每次重试间隔2秒
-	})
+	//maxRetries := 3
 
-	if err != nil {
-		g.Log().Error(s.ctx, fmt.Sprintf("推送失败，已重试%d次: %v", maxRetries, err))
-		// 保存到失败队列，等待人工处理
-		s.saveToFailedQueue(data, err)
-		return err
-	}
+	//err := gretry.Try(s.ctx, func(ctx context.Context) error {
+	//	// 执行推送逻辑
+	//	return s.doPush(data)
+	//}, gretry.Option{
+	//	Max:   maxRetries,
+	//	Delay: 2 * time.Second, // 每次重试间隔2秒
+	//})
+
+	//if err != nil {
+	//	g.Log().Error(s.ctx, fmt.Sprintf("推送失败，已重试%d次: %v", maxRetries, err))
+	//	// 保存到失败队列，等待人工处理
+	//	s.saveToFailedQueue(data, err)
+	//	return err
+	//}
 
 	g.Log().Info(s.ctx, "推送成功")
 	return nil
@@ -60,7 +56,7 @@ func (s *PushService) doPush(data interface{}) error {
 	// 例如：调用下游API
 	client := g.Client()
 	client.SetTimeout(10 * time.Second)
-	
+
 	resp, err := client.Post(s.ctx, "http://downstream-api/push", data)
 	if err != nil {
 		return fmt.Errorf("推送请求失败: %w", err)
@@ -90,7 +86,7 @@ func (s *PushService) saveToFailedQueue(data interface{}, err error) {
 
 	// 保存到数据库
 	// dao.PushRecord.Insert(s.ctx, record)
-	
+
 	g.Log().Warning(s.ctx, fmt.Sprintf("推送失败记录已保存: %+v", record))
 }
 
@@ -98,7 +94,7 @@ func (s *PushService) saveToFailedQueue(data interface{}, err error) {
 func (s *PushService) RetryFailedPushes() {
 	// 从数据库中查询需要重试的记录
 	// records := dao.PushRecord.Where("status", "failed").Where("next_retry_at < ?", time.Now()).All()
-	
+
 	// for _, record := range records {
 	//     s.retrySingle(record)
 	// }
@@ -127,19 +123,19 @@ func (s *PushService) retrySingle(record PushRecord) {
 }
 
 // markNeedManualIntervention 标记需要人工介入
-func (s *PushService) markNeedManualIntervention(record PushRecord) {
-	record.Status = "need_manual"
-	// dao.PushRecord.Update(record)
-	
-	// 发送告警通知相关人员
-	g.Log().Alert(s.ctx, fmt.Sprintf("【需要人工介入】推送记录 %s 已超过最大重试次数", record.BusinessId))
-}
+//func (s *PushService) markNeedManualIntervention(record PushRecord) {
+//	record.Status = "need_manual"
+//	// dao.PushRecord.Update(record)
+//
+//	// 发送告警通知相关人员
+//	g.Log().Alert(s.ctx, fmt.Sprintf("【需要人工介入】推送记录 %s 已超过最大重试次数", record.BusinessId))
+//}
 
 // GetFailedRecords 获取失败记录列表（用于管理后台展示）
 func (s *PushService) GetFailedRecords(page, pageSize int) ([]PushRecord, int, error) {
 	// 从数据库查询
 	// records, total := dao.PushRecord.Where("status IN ?", []string{"failed", "need_manual"}).Page(page, pageSize).AllAndCount()
-	
+
 	return []PushRecord{}, 0, nil
 }
 
@@ -149,18 +145,19 @@ func (s *PushService) ManualRetry(recordId int64) error {
 	// if record == nil {
 	//     return errors.New("记录不存在")
 	// }
-	
+
 	// 重置重试次数
 	// record.RetryCount = 0
 	// record.Status = "pending"
 	// dao.PushRecord.Update(record)
-	
+
 	// 立即执行重试
 	// go s.retrySingle(*record)
-	
+
 	return nil
 }
 
 func generateBusinessId() string {
 	return fmt.Sprintf("push_%d", time.Now().UnixNano())
 }
+*/
