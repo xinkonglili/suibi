@@ -4,7 +4,7 @@ server:
 gfcli:
   gen:
     dao:
-      - link: "mysql:root:Jinli666@tcp(127.0.0.1:3306)/business_trip_test"
+      - link: "mysql:root:jinli666@tcp(127.0.0.1:3306)/business_trip_test"
         descriptionTag: true
         srcFolder: "./frame/api"
         dstFolder: "./frame/internal/controller"
