@@ -5,6 +5,7 @@ import (
 	"sync"
 
 	"github.com/gogf/gf/v2/container/gvar"
+	"github.com/gogf/gf/v2/database/gredis"
 	"github.com/gogf/gf/v2/frame/g"
 )
 
@@ -64,4 +65,30 @@ func DoRedisEval(ctx context.Context, script string, keys []string, args []inter
 	//}(ctx, timePoint, keys, args)
 
 	return g.Redis().Eval(ctx, script, int64(len(keys)), keys, args)
+}
+
+func ZRange(ctx context.Context, key string, min, max int64) ([]string, error) {
+	res, err := g.Redis().ZRange(ctx, getKey(key), min, max, gredis.ZRangeOption{
+		// WithScores: true,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return res.Strings(), nil
+}
+
+func ZRem(ctx context.Context, key string, member any) (int64, error) {
+	return g.Redis().ZRem(ctx, getKey(key), member)
+}
+
+func Rpush(ctx context.Context, key string, member any) (int64, error) {
+	return g.Redis().RPush(ctx, getKey(key), member)
+}
+
+func LPop(ctx context.Context, key string) (string, error) {
+	pop, err := g.Redis().LPop(ctx, getKey(key))
+	if err != nil {
+		return "", err
+	}
+	return pop.String(), nil
 }

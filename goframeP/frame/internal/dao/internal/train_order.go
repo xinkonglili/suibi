@@ -21,18 +21,20 @@ type TrainOrderDao struct {
 
 // TrainOrderColumns defines and stores column names for the table train_order.
 type TrainOrderColumns struct {
-	Id       string //
-	UserId   string // 用户id
-	OrderId  string //
-	UserName string //
+	Id         string //
+	UserId     string // 用户id
+	OrderId    string //
+	UserName   string //
+	FareStatus string //
 }
 
 // trainOrderColumns holds the columns for the table train_order.
 var trainOrderColumns = TrainOrderColumns{
-	Id:       "id",
-	UserId:   "user_id",
-	OrderId:  "order_id",
-	UserName: "user_name",
+	Id:         "id",
+	UserId:     "user_id",
+	OrderId:    "order_id",
+	UserName:   "user_name",
+	FareStatus: "fare_status",
 }
 
 // NewTrainOrderDao creates and returns a new DAO object for table data access.

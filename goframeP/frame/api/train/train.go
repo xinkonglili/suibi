@@ -16,4 +16,5 @@ type ITrainV1 interface {
 	TrainOrderUpdate(ctx context.Context, req *v1.TrainOrderUpdateReq) (res *v1.TrainOrderUpdateRes, err error)
 	TrainOrderGetOne(ctx context.Context, req *v1.TrainOrderGetOneReq) (res *v1.TrainOrderGetOneRes, err error)
 	TrainOrderGetList(ctx context.Context, req *v1.TrainOrderGetListReq) (res *v1.TrainOrderGetListRes, err error)
+	TrainOrderPayNotify(ctx context.Context, req *v1.TrainOrderPayNotifyReq) (res *v1.TrainOrderPayNotifyRes, err error)
 }

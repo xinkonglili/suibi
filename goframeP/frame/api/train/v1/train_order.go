@@ -8,8 +8,8 @@ import (
 
 type TrainOrderCreateReq struct {
 	g.Meta   `path:"/train-order" method:"post" tags:"TrainOrder" summary:"Create train order"`
-	UserId   int    `json:"userId" v:"required" dc:"用户id"`               // 用户id
-	OrderId  int    `json:"orderId" v:"required" dc:"订单id"`              // 订单id
+	UserId   int    `json:"userId" v:"required" dc:"用户id"`                 // 用户id
+	OrderId  int    `json:"orderId" v:"required" dc:"订单id"`                // 订单id
 	UserName string `json:"userName" v:"required|length:1,50" dc:"用户姓名"` // 用户姓名
 }
 
@@ -55,4 +55,13 @@ type TrainOrderGetListRes struct {
 	List  []*entity.TrainOrder `json:"list" dc:"订单列表"`
 	Total int                  `json:"total" dc:"总数"`
 	Page  int                  `json:"page" dc:"当前页码"`
+}
+
+type TrainOrderPayNotifyReq struct {
+	g.Meta  `path:"/train-order/pay-notify" method:"post" tags:"TrainOrder" summary:"支付回调"`
+	OrderId string `v:"required" dc:"订单ID"`
+}
+
+type TrainOrderPayNotifyRes struct {
+	Msg string `json:"msg"`
 }

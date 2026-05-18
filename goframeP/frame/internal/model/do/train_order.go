@@ -10,9 +10,10 @@ import (
 
 // TrainOrder is the golang structure of table train_order for DAO operations like Where/Data.
 type TrainOrder struct {
-	g.Meta   `orm:"table:train_order, do:true"`
-	Id       any //
-	UserId   any // 用户id
-	OrderId  any //
-	UserName any //
+	g.Meta     `orm:"table:train_order, do:true"`
+	Id         any //
+	UserId     any // 用户id
+	OrderId    any //
+	UserName   any //
+	FareStatus any //
 }

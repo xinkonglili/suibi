@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	v1 "goframeP/frame/api/train/v1"
 	"goframeP/frame/internal/dao"
 	"goframeP/frame/internal/model/entity"
 )
@@ -47,4 +48,16 @@ func (s *TrainOrderService) DeleteTrainOrder(id int64) error {
 
 func (s *service) PickUp() {
 
+}
+
+// PayOrderCheckInit
+func (s *TrainOrderService) PayOrderCheckInit() (bool, error) {
+	return true, nil
+
+}
+
+// PayOrder
+func (s *TrainOrderService) PayOrder(req *entity.TrainOrder) (result *v1.TrainOrderPayNotifyRes, err error) {
+	//todo 待实现
+	return &v1.TrainOrderPayNotifyRes{}, nil
 }
