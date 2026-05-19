@@ -11,7 +11,6 @@ import (
 func (c *ControllerV1) TrainOrderCreate(ctx context.Context, req *v1.TrainOrderCreateReq) (res *v1.TrainOrderCreateRes, err error) {
 	data := entity.TrainOrder{
 		UserId:   req.UserId,
-		OrderId:  req.OrderId,
 		UserName: req.UserName,
 	}
 	id, err := service.NewTrainOrderService(ctx).CreateTrainOrder(data)

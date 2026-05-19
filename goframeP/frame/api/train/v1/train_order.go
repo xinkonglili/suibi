@@ -8,8 +8,8 @@ import (
 
 type TrainOrderCreateReq struct {
 	g.Meta   `path:"/train-order" method:"post" tags:"TrainOrder" summary:"Create train order"`
-	UserId   int    `json:"userId" v:"required" dc:"用户id"`                 // 用户id
-	OrderId  int    `json:"orderId" v:"required" dc:"订单id"`                // 订单id
+	UserId   int    `json:"userId" v:"required" dc:"用户id"`               // 用户id
+	OrderId  int    `json:"orderId" v:"required" dc:"订单id"`              // 订单id
 	UserName string `json:"userName" v:"required|length:1,50" dc:"用户姓名"` // 用户姓名
 }
 

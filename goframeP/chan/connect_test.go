@@ -21,7 +21,7 @@ http.Transport  ← 真正管连接池的地方
 TCP 连接池 [ conn1, conn2, conn3... ]*/
 
 var a = func(r *ghttp.Request) {
-	r.Response.Write("hello world")
+	r.Response.Write("user world")
 }
 
 var b = func(r *ghttp.Request) {

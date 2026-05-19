@@ -12,7 +12,6 @@ func (c *ControllerV1) TrainOrderUpdate(ctx context.Context, req *v1.TrainOrderU
 	data := entity.TrainOrder{
 		Id:       req.Id,
 		UserId:   *req.UserId,
-		OrderId:  *req.OrderId,
 		UserName: *req.UserName,
 	}
 	err = service.NewTrainOrderService(ctx).UpdateTrainOrder(data)
