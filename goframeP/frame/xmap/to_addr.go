@@ -1,38 +1,14 @@
-package main
+package xmap
 
 import (
-	"context"
 	"fmt"
-	"goframeP/frame/consts"
-	"goframeP/frame/request"
+	consts2 "goframeP/consts"
 	"goframeP/frame/xcity"
-	"goframeP/frame/xmap"
 	"net/url"
-	"strings"
-	"testing"
 
 	"github.com/gogf/gf/v2/encoding/gjson"
 	"github.com/gogf/gf/v2/frame/g"
-	"github.com/gogf/gf/v2/os/gctx"
 )
-
-func TestMap(t *testing.T) {
-	amp := xmap.NewAmap(gctx.New())
-	endAddrInfo := amp.LatAndLngToAddr(xmap.NewMapPoint("0.0", "0.0"))
-	if endAddrInfo == nil {
-		return
-	}
-	g.Log(endAddrInfo.Address, endAddrInfo.CityName, endAddrInfo.CityCode, endAddrInfo.AdCode)
-}
-
-type Amap struct {
-	Ctx context.Context
-}
-
-type MapPoint struct {
-	Latitude  string `json:"latitude"`
-	Longitude string `json:"longitude"`
-}
 
 type LatAndLngToAddrResult struct {
 	CityName string `json:"city_name"` // 城市名称
@@ -45,11 +21,11 @@ type LatAndLngToAddrResult struct {
 func (a *Amap) LatAndLngToAddr(mp MapPoint) (addr *LatAndLngToAddrResult) {
 	apiUrl, _ := url.Parse("/v3/geocode/regeo")
 	addr = &LatAndLngToAddrResult{}
-	redisKey := consts.RedisAmapLatLngKey + fmt.Sprintf("%s_%s", mp.Latitude, mp.Longitude)
+	redisKey := consts2.RedisAmapLatLngKey + fmt.Sprintf("%s_%s", mp.Latitude, mp.Longitude)
 	//var cacheExpiration int64 = 3600 // 缓存1小时
 
 	// 先检查本地内存缓存
-	if cacheData, err := consts.GCtx.Get(consts.SwitchCTX, redisKey); err == nil && cacheData != nil {
+	if cacheData, err := consts2.GCtx.Get(consts2.SwitchCTX, redisKey); err == nil && cacheData != nil {
 		if err = gjson.Unmarshal([]byte(cacheData.String()), addr); err == nil {
 			return addr
 		} else {
@@ -83,17 +59,26 @@ func (a *Amap) LatAndLngToAddr(mp MapPoint) (addr *LatAndLngToAddrResult) {
 		"extensions": {"base"},
 	}
 	apiUrl.RawQuery = params.Encode()
-	resp, err := request.Get("amap").Do(a.Ctx, apiUrl.String(), nil)
+
+	// 使用 GoFrame 自带 HTTP 客户端发送请求
+	client := g.Client()
+	client.SetPrefix("https://restapi.amap.com") // 高德地图 API 基础地址
+
+	resp, err := client.Get(a.Ctx, apiUrl.String())
 	if err != nil {
 		g.Log().Errorf(a.Ctx, "[amap] [LatAndLngToAddr] 高德地图API请求失败, lat:%v, lng:%v, ERR: %v", mp.Latitude, mp.Longitude, err.Error())
 		return nil
-	} else if resp == "" {
+	}
+	defer resp.Close()
+
+	respBody := resp.ReadAllString()
+	if respBody == "" {
 		g.Log().Errorf(a.Ctx, "[amap] [LatAndLngToAddr] ERR: 高德地图API返回数据为空, lat:%v, lng:%v", mp.Latitude, mp.Longitude)
 		return nil
 	}
-	respJson := gjson.New(resp)
+	respJson := gjson.New(respBody)
 	if respJson.Get("status").Int() != 1 {
-		g.Log().Errorf(a.Ctx, "[amap] [LatAndLngToAddr] ERR: 高德地图API返回错误, lat:%v, lng:%v, msg: %v", mp.Latitude, mp.Longitude, respJson.Get("message").String())
+		g.Log().Errorf(a.Ctx, "[amap] [LatAndLngToAddr] ERR: 高德地图API返回错误, lat:%v, lng:%v, 原始响应: %v", mp.Latitude, mp.Longitude, respBody)
 		return nil
 	}
 
@@ -124,60 +109,17 @@ func (a *Amap) LatAndLngToAddr(mp MapPoint) (addr *LatAndLngToAddrResult) {
 		AdCode:   adCode,
 		Address:  address,
 	}
-
-	// 缓存经纬度和地址信息到Redis和本地内存
+	//
+	//// 缓存经纬度和地址信息到Redis和本地内存
 	//if cacheData, err := gjson.Marshal(addr); err == nil {
 	//	// 同时更新Redis和本地缓存
-	//	//if _, redisErr := redis.Set(a.Ctx, redisKey, string(cacheData), cacheExpiration); redisErr != nil {
-	//	//	g.Log().Warningf(a.Ctx, "缓存城市经纬度到Redis失败: key: %s, err: %v", redisKey, redisErr)
-	//	//}
-	//	//if cacheErr := consts.GCtx.Set(consts.SwitchCTX, redisKey, string(cacheData), time.Duration(900)*time.Second); cacheErr != nil {
-	//	//	g.Log().Warningf(a.Ctx, "缓存城市代码到本地内存失败: key: %s, err: %v", redisKey, cacheErr)
-	//	//}
+	//	if _, redisErr := redis.Set(a.Ctx, redisKey, string(cacheData), cacheExpiration); redisErr != nil {
+	//		g.Log().Warningf(a.Ctx, "缓存城市经纬度到Redis失败: key: %s, err: %v", redisKey, redisErr)
+	//	}
+	//	if cacheErr := consts.GCtx.Set(consts.SwitchCTX, redisKey, string(cacheData), time.Duration(900)*time.Second); cacheErr != nil {
+	//		g.Log().Warningf(a.Ctx, "缓存城市代码到本地内存失败: key: %s, err: %v", redisKey, cacheErr)
+	//	}
 	//}
 
 	return
 }
-func (ap *MapPoint) ToString() string {
-	return fmt.Sprintf("%v,%v", ap.GetLng(), ap.GetLat())
-}
-
-// 纬度小数点不超过6位（0.1米精度）
-func (ap *MapPoint) GetLat() string {
-	parts := strings.SplitN(ap.Latitude, ".", 2)
-	if len(parts) != 2 || len(parts[1]) <= 6 {
-		return ap.Latitude
-	}
-	return fmt.Sprintf("%s.%s", parts[0], parts[1][:6])
-}
-
-// 经度小数点不超过6位（0.1米精度）
-func (ap *MapPoint) GetLng() string {
-	parts := strings.SplitN(ap.Longitude, ".", 2)
-	if len(parts) != 2 || len(parts[1]) <= 6 {
-		return ap.Longitude
-	}
-	return fmt.Sprintf("%s.%s", parts[0], parts[1][:6])
-}
-
-//func Set(ctx context.Context, key string, value string, t int64) (result bool, err error) {
-//	gVal, err := g.Redis().Set(ctx, getKey(key), value)
-//	if err != nil {
-//		return result, err
-//	}
-//
-//	//timePoint := time.Now()
-//	//defer func(ctx context.Context, timePoint time.Time, key, value string) {
-//	//	go func(ctx context.Context, timePoint time.Time, key, value string) {
-//	//		g.Log(RedisPrefix).Debug(ctx, fmt.Sprintf("[ %d ms]", time.Since(timePoint).Milliseconds())+" Set "+key+" "+value)
-//	//	}(ctx, timePoint, key, value)
-//	//}(ctx, timePoint, key, value)
-//
-//	g.Redis().Expire(ctx, getKey(key), t)
-//	return gVal.Bool(), err
-//}
-
-//func getKey(key string) string {
-//	RedisOnce.Do(RedisInit)
-//	return consts.RedisPrefix + key
-//}
